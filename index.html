@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Important Art of the 21st Century</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <script>
+    const burger = document.querySelector(".burger");
+    const navLinks = document.getElementById("navLinks");
+
+    burger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+      const expanded = burger.getAttribute("aria-expanded") === "true";
+      burger.setAttribute("aria-expanded", String(!expanded));
+    });
+  </script>
+
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1>Important Art of the 21st Century</h1>
+        <nav class="site-nav">
+          <button
+            class="burger"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <span></span><span></span><span></span>
+          </button>
+
+          <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="pages/ai-weiwei.html">Ai Weiwei</a>
+            <a href="pages/olafur-eliasson.html">Olafur Eliasson</a>
+            <a href="pages/yayoi-kusama.html">Yayoi Kusama</a>
+            <a href="pages/beeple.html">Beeple</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h2>Exploring influential art and artists shaping our century</h2>
+        <p>
+          This site highlights landmark works, why they matter, and where to
+          learn more.
+        </p>
+      </section>
+
+      <section class="featured">
+        <h3>Featured Works</h3>
+        <ul class="grid">
+          <li>
+            <a href="pages/ai-weiwei.html">
+              <img
+                src="assets/ai-weiwei.jpg"
+                alt="Ai Weiwei work placeholder"
+              />
+              <strong>Ai Weiwei — Activist installations</strong>
+            </a>
+          </li>
+          <li>
+            <a href="pages/olafur-eliasson.html">
+              <img
+                src="assets/olafur-eliasson.jpg"
+                alt="Olafur Eliasson work placeholder"
+              />
+              <strong>Olafur Eliasson — Immersive installations</strong>
+            </a>
+          </li>
+          <li>
+            <a href="pages/yayoi-kusama.html">
+              <img
+                src="assets/yayoi-kusama.jpg"
+                alt="Yayoi Kusama work placeholder"
+              />
+              <strong>Yayoi Kusama — Infinity Rooms</strong>
+            </a>
+          </li>
+          <li>
+            <a href="pages/beeple.html">
+              <img src="assets/beeple.jpg" alt="Beeple work placeholder" />
+              <strong>Beeple — Digital and NFT art</strong>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="about">
+        <h3>About this project</h3>
+        <p>
+          This site is a starter guide to notable art and artists of the 21st
+          century. Each page contains context, significance, and links for
+          further reading. Add your own essays and images by editing the files
+          in this repository.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Created by Santi — expand this site with more works, images, and
+          citations.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
