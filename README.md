@@ -5,4 +5,4 @@ This is my course repository for OIM3690.
 ## About Me 
 - Name: Santiago Garmendia
 ## My Personal website link:
-<p> Visit: <a href="sgarmendia1.github.io/">My Personal Website</a></p>
+<p> Visit: <a href="https://sgarmendia1.github.io/">My Personal Website</a></p>
