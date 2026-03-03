@@ -10,4 +10,5 @@ This is my course repository for OIM3690.
 ## Projects 
 
 -[Personal Website](https://github.com/sgarmendia1/sgarmendia1.github.io)
+
 -[Mini Project 1](https://github.com/sgarmendia1/Mini-Project-1)
