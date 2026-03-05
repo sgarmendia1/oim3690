@@ -1,0 +1,21 @@
+﻿html, body {
+  height:100%;
+  margin:0;
+  /* background image located one directory up */
+  background: #282a36 url('../images/waterfalls-Seljalandsfoss-GettyImages-457381095.webp') no-repeat center center/cover;
+  color:#f8f8f2;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.centered {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100%;
+  text-align:center;
+}
+
+#clock {
+  font-size:5rem;
+  letter-spacing:0.05em;
+}
