@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grade Calculator</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 1rem; max-width: 500px; margin: auto; }
+      label, button, p { display: block; margin-top: 0.75rem; }
+      input { width: 100%; padding: 0.5rem; font-size: 1rem; }
+      button { padding: 0.55rem 0.9rem; font-size: 1rem; cursor: pointer; }
+      p#result { margin-top: 1rem; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Grade Calculator</h1>
+
+    <label for="scoreInput">Enter score (0-100):</label>
+    <input id="scoreInput" type="number" min="0" max="100" placeholder="Example: 87" />
+
+    <button id="calculateBtn" type="button">Calculate Grade</button>
+
+    <p id="result">Your grade will appear here.</p>
+
+    <script>
+      function getGrade(score) {
+        if (score >= 90) {
+          return score >= 96 ? 'A+' : 'A';
+        } else if (score >= 80) {
+          return score >= 86 ? 'B+' : 'B';
+        } else if (score >= 70) {
+          return score >= 76 ? 'C+' : 'C';
+        } else if (score >= 60) {
+          return score >= 66 ? 'D+' : 'D';
+        } else {
+          return 'F';
+        }
+      }
+
+      document.getElementById('calculateBtn').addEventListener('click', function() {
+        const scoreInput = document.getElementById('scoreInput');
+        const resultEl = document.getElementById('result');
+        const scoreValue = scoreInput.value.trim();
+
+        if (scoreValue === '') {
+          resultEl.textContent = 'Please enter a score.';
+          resultEl.style.color = 'crimson';
+          return;
+        }
+
+        const score = Number(scoreValue);
+        if (Number.isNaN(score)) {
+          resultEl.textContent = 'Please enter a valid number.';
+          resultEl.style.color = 'crimson';
+          return;
+        }
+
+        if (score < 0 || score > 100) {
+          resultEl.textContent = 'Score must be 0-100.';
+          resultEl.style.color = 'crimson';
+          return;
+        }
+
+        const grade = getGrade(score);
+        resultEl.textContent = `Score: ${score} → Grade: ${grade}`;
+        resultEl.style.color = 'green';
+      });
+    </script>
+  </body>
+</html>

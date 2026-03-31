@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      transition: background-color 0.5s ease;
+    }
+    body.english { background-color: lightblue; }
+    body.spanish { background-color: lightgreen; }
+    body.mandarin { background-color: lightyellow; }
+    body.hindi { background-color: lightcoral; }
+    body.arabic { background-color: lightcyan; }
+    #greeting {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    #greeting.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="english">
+  <h1>Hello, World!</h1>
+  <input id="name" type="text">
+  <select id="language">
+    <option value="english">English</option>
+    <option value="spanish">Spanish</option>
+    <option value="mandarin">Mandarin Chinese</option>
+    <option value="hindi">Hindi</option>
+    <option value="arabic">Arabic</option>
+  </select>
+  <button>Greet</button>
+  <p id="greeting"></p>
+
+  <script>
+    const input = document.querySelector('#name');
+    const button = document.querySelector('button');
+    const p = document.querySelector('#greeting');
+    const select = document.querySelector('#language');
+
+    const greetings = {
+      english: 'Hello, my name is {name}!',
+      spanish: '¡Hola, mi nombre es {name}!',
+      mandarin: '你好，我的名字是 {name}！',
+      hindi: 'नमस्ते, मेरा नाम {name} है!',
+      arabic: 'مرحبا، اسمي {name}!'
+    };
+
+    select.addEventListener('change', () => {
+      document.body.className = select.value;
+    });
+
+    button.addEventListener('click', () => {
+      const name = input.value;
+      const lang = select.value;
+      const greeting = greetings[lang].replace('{name}', name);
+      p.textContent = greeting;
+      p.classList.remove('show');
+      setTimeout(() => p.classList.add('show'), 10);
+    });
+  </script>
+</body>
+</html>
