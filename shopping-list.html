@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping List</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    h1 { margin-bottom: 0.5rem; }
+    #new-item-container { margin: 1rem 0; }
+    input { padding: 0.5rem; font-size: 1rem; }
+    button { padding: 0.5rem 1rem; font-size: 1rem; margin-left: 0.5rem; }
+    ul { padding-left: 1.3rem; }
+    li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body>
+  <h1>Shopping List</h1>
+
+  <div id="new-item-container">
+    <input id="item-input" type="text" placeholder="Type a new item" aria-label="New item" />
+    <button id="add-button" type="button">Add Item</button>
+  </div>
+
+  <ul id="shopping-list"></ul>
+
+  <script>
+    // Start with an array of initial items
+    const items = ["Milk", "Eggs", "Bread"];
+
+    // Get page elements
+    const listEl = document.getElementById("shopping-list");
+    const itemInput = document.getElementById("item-input");
+    const addButton = document.getElementById("add-button");
+
+    // Render the whole list from the array every time
+    function renderItems() {
+      // Clear current list
+      listEl.innerHTML = "";
+
+      // Re-create all list items from the array
+      for (var i = 0; i < items.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = items[i];
+        listEl.appendChild(li);
+      }
+    }
+
+    // Add item handler
+    function addItem() {
+      var newItem = itemInput.value.trim();
+      if (newItem === "") {
+        return; // do nothing for empty input
+      }
+
+      // Capitalize first letter and keep the rest as typed (or optionally lowercase)
+      newItem = newItem.charAt(0).toUpperCase() + newItem.slice(1);
+
+      // Add new item to the array
+      items.push(newItem);
+
+      // Clear input and re-render list
+      itemInput.value = "";
+      renderItems();
+      itemInput.focus();
+    }
+
+    // Customer clicks Add Item button
+    addButton.addEventListener("click", addItem);
+
+    // Customer presses Enter in input
+    itemInput.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        addItem();
+      }
+    });
+
+    // First render on page load
+    renderItems();
+  </script>
+</body>
+</html>
