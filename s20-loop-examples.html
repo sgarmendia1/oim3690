@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop Examples - Stars & Student Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .rating-container {
+            background-color: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stars {
+            font-size: 32px;
+            color: #ffd700;
+            letter-spacing: 4px;
+            margin: 20px 0;
+        }
+        .rating-buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 0 8px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .current-rating {
+            font-size: 18px;
+            color: #666;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .student-container {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .student-card {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .student-name {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+        }
+        .student-grade {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+        }
+        .grade-A { background-color: #28a745; }
+        .grade-B { background-color: #007bff; }
+        .grade-C { background-color: #ffc107; color: #212529; }
+        .scores-container {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .score-list {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .score-item {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .score-value {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .pass-badge {
+            background-color: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .fail-badge {
+            background-color: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .counter-container {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .grade-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .grade-badge {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: white;
+            font-size: 14px;
+        }
+        .grade-A { background-color: #28a745; }
+        .grade-B { background-color: #007bff; }
+        .grade-C { background-color: #ffc107; color: #212529; }
+        .counter-result {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .add-student-form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+        }
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        .form-group {
+            flex: 1;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .add-button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .add-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Loop Examples</h1>
+
+    <div class="rating-container">
+        <h2>Rate this item</h2>
+        <div class="stars" id="interactive-stars"></div>
+        <div class="rating-buttons">
+            <button onclick="setRating(1)">1 Star</button>
+            <button onclick="setRating(2)">2 Stars</button>
+            <button onclick="setRating(3)">3 Stars</button>
+            <button onclick="setRating(4)">4 Stars</button>
+            <button onclick="setRating(5)">5 Stars</button>
+        </div>
+        <div class="current-rating" id="current-rating">Current rating: 3</div>
+    </div>
+
+    <div class="student-container">
+        <h2>Student Cards</h2>
+
+        <div class="add-student-form">
+            <h3>Add New Student</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="student-name">Student Name:</label>
+                    <input type="text" id="student-name" placeholder="Enter student name">
+                </div>
+                <div class="form-group">
+                    <label for="student-grade">Grade:</label>
+                    <select id="student-grade">
+                        <option value="">Select grade</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+                <button class="add-button" onclick="addStudent()">Add Student</button>
+            </div>
+        </div>
+
+        <div id="student-list"></div>
+    </div>
+
+    <div class="scores-container">
+        <h2>All Scores with Pass/Fail Status</h2>
+        <div class="score-list">
+            <div id="passing"></div>
+        </div>
+    </div>
+
+    <div class="counter-container">
+        <h2>Grade Counter Pattern</h2>
+        <p>Counting occurrences of 'A' grades in the array</p>
+        <div class="grade-display" id="grade-display"></div>
+        <div class="counter-result" id="counter-result"></div>
+    </div>
+
+    <script>
+        // Function to generate star rating
+        function generateStars(rating, containerId) {
+            const container = document.getElementById(containerId);
+            let stars = '';
+
+            for (let i = 0; i < 5; i++) {
+                if (i < rating) {
+                    stars += '★';
+                } else {
+                    stars += '☆';
+                }
+            }
+            container.textContent = stars;
+        }
+
+        // Interactive rating functionality
+        let currentRating = 3;
+        generateStars(currentRating, 'interactive-stars');
+
+        function setRating(rating) {
+            currentRating = rating;
+            generateStars(rating, 'interactive-stars');
+            document.getElementById('current-rating').textContent = `Current rating: ${rating}`;
+        }
+
+        // Student cards functionality
+        let students = [
+            { name: 'Alice', grade: 'A' },
+            { name: 'Bob', grade: 'B' },
+            { name: 'Charlie', grade: 'C' }
+        ];
+
+        const list = document.querySelector('#student-list');
+
+        function renderStudents() {
+            list.innerHTML = ''; // Clear existing list
+
+            for (let i = 0; i < students.length; i++) {
+                const card = document.createElement('div');
+                card.className = 'student-card';
+
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'student-name';
+                nameSpan.textContent = students[i].name;
+
+                const gradeSpan = document.createElement('span');
+                gradeSpan.className = `student-grade grade-${students[i].grade}`;
+                gradeSpan.textContent = students[i].grade;
+
+                card.appendChild(nameSpan);
+                card.appendChild(gradeSpan);
+
+                list.appendChild(card);
+            }
+        }
+
+        function addStudent() {
+            const nameInput = document.getElementById('student-name');
+            const gradeSelect = document.getElementById('student-grade');
+
+            const name = nameInput.value.trim();
+            const grade = gradeSelect.value;
+
+            if (name === '' || grade === '') {
+                alert('Please enter both name and grade');
+                return;
+            }
+
+            // Add new student to array
+            students.push({ name: name, grade: grade });
+
+            // Re-render the student list
+            renderStudents();
+
+            // Clear form
+            nameInput.value = '';
+            gradeSelect.value = '';
+        }
+
+        // Initial render
+        renderStudents();
+
+        // Passing scores functionality
+        const scores = [88, 72, 95, 63, 45, 81, 56, 90];
+        const passList = document.querySelector('#passing');
+
+        for (let i = 0; i < scores.length; i++) {
+            const li = document.createElement('li');
+            li.className = 'score-item';
+
+            const scoreSpan = document.createElement('span');
+            scoreSpan.className = 'score-value';
+            scoreSpan.textContent = scores[i];
+
+            const statusBadge = document.createElement('span');
+            if (scores[i] >= 60) {
+                statusBadge.className = 'pass-badge';
+                statusBadge.textContent = 'PASS';
+            } else {
+                statusBadge.className = 'fail-badge';
+                statusBadge.textContent = 'FAIL';
+            }
+
+            li.appendChild(scoreSpan);
+            li.appendChild(statusBadge);
+
+            passList.appendChild(li);
+        }
+
+        // Counter pattern functionality
+        const grades = ['A', 'B', 'A', 'C', 'A', 'B'];
+        let countA = 0;
+
+        const gradeDisplay = document.getElementById('grade-display');
+
+        // Display all grades with badges
+        for (let i = 0; i < grades.length; i++) {
+            const gradeBadge = document.createElement('span');
+            gradeBadge.className = `grade-badge grade-${grades[i]}`;
+            gradeBadge.textContent = grades[i];
+            gradeDisplay.appendChild(gradeBadge);
+
+            // Count A's using the counter pattern
+            if (grades[i] === 'A') {
+                countA++;
+            }
+        }
+
+        // Display the count result
+        const counterResult = document.getElementById('counter-result');
+        counterResult.textContent = `Number of A's: ${countA}`;
+    </script>
+</body>
+</html>
