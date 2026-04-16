@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Town Explorer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        label, input, p, ul {
+            display: block;
+            margin-bottom: 1rem;
+        }
+        input {
+            padding: 0.5rem;
+            width: 100%;
+            max-width: 360px;
+            box-sizing: border-box;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .summary {
+            margin-top: 0;
+        }
+        .largest-town {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f7f7f7;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Town Explorer</h1>
+    <label for="search">Search towns by name:</label>
+    <input id="search" type="text" placeholder="Type a town name" />
+    <p id="status">Loading towns...</p>
+    <p id="match-count"></p>
+    <div class="largest-town" id="largest-town"></div>
+    <div class="largest-town" id="smallest-town"></div>
+    <ul id="town-list"></ul>
+
+    <script>
+        const searchInput = document.querySelector('#search');
+        const status = document.querySelector('#status');
+        const matchCount = document.querySelector('#match-count');
+        const largestTown = document.querySelector('#largest-town');
+        const smallestTown = document.querySelector('#smallest-town');
+        const townList = document.querySelector('#town-list');
+
+        let towns = [];
+
+        function renderTowns(filteredTowns) {
+            townList.innerHTML = '';
+            if (!filteredTowns.length) {
+                townList.innerHTML = '<li>No towns matched.</li>';
+                return;
+            }
+
+            const firstTen = filteredTowns.slice(0, 10);
+            firstTen.forEach(town => {
+                const li = document.createElement('li');
+                li.textContent = `${town.name} (${town.county}) - pop ${town.population.toLocaleString()}`;
+                townList.appendChild(li);
+            });
+        }
+
+        function updateLargestTown() {
+            if (!towns.length) {
+                largestTown.textContent = '';
+                return;
+            }
+            const largest = towns.reduce((max, town) => {
+                return town.population > max.population ? town : max;
+            }, towns[0]);
+            largestTown.textContent = `Largest town: ${largest.name} (${largest.county}) with population ${largest.population.toLocaleString()}`;
+        }
+
+        function updateSmallestTown() {
+            if (!towns.length) {
+                smallestTown.textContent = '';
+                return;
+            }
+            const smallest = towns.reduce((min, town) => {
+                return town.population < min.population ? town : min;
+            }, towns[0]);
+            smallestTown.textContent = `Smallest town: ${smallest.name} (${smallest.county}) with population ${smallest.population.toLocaleString()}`;
+        }
+
+        function updateMatches() {
+            const query = searchInput.value.trim().toLowerCase();
+            const filtered = query
+                ? towns.filter(town => town.name.toLowerCase().includes(query))
+                : towns;
+
+            matchCount.textContent = `Matched towns: ${filtered.length}`;
+            renderTowns(filtered);
+        }
+
+        async function loadTowns() {
+            status.textContent = 'Loading towns...';
+            try {
+                const response = await fetch('https://oim.108122.xyz/mass');
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                const data = await response.json();
+                towns = data.data || [];
+                status.textContent = '';
+                updateLargestTown();
+                updateSmallestTown();
+                updateMatches();
+            } catch (error) {
+                status.textContent = 'Failed to load towns.';
+                townList.innerHTML = '';
+                matchCount.textContent = '';
+                largestTown.textContent = '';
+                console.error(error);
+            }
+        }
+
+        searchInput.addEventListener('input', updateMatches);
+        loadTowns();
+    </script>
+</body>
+</html>
